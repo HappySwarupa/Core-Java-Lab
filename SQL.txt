@@ -1,0 +1,42 @@
+use companyABC;
+CREATE TABLE emp1( 
+eno int primary key,
+ename varchar(20) not null,
+Salary int,
+designation varchar(20)not null,
+pno int ,
+dno int);
+
+CREATE TABLE Project(
+pno int primary key,
+pname varchar(20)not null,
+budget int,
+dno int);
+CREATE TABLE dept(
+dno int primary key,
+dname varchar(20)not null,
+location varchar(20)not null);
+INSERT INTO emp1 (eno,ename,Salary,designation)
+VALUES (224,"Swarupa Dey",15000,"Retail Excutive"),
+ (225,"Sumit Sarkar",45000,"Associative engineer"),
+ (226,"Sanjana ghosh",25000,"Developer"),
+(228,"Nilanjana Ghosh",50000,"Automation"),
+(229,"Aranyak Sarkar",100000,"Manager"),
+(230,"Rajarshree Adhikary",30000,"Senior Developer"),
+(231,"Swarnob Chacrobarty",35000,"Junior Developer"),
+(232,"Subhadip Ghosh",400000,"System Engineer"),
+ (233,"Janey roy",100000,"Sales Excutive");
+ select * from emp;
+ INSERT INTO Project(pno,pname,budget,dno)
+ VALUES(121,"awss",10000,1),
+ (122,"python",15000,2),
+ (121,"PHP",5000,3),
+ (121,"java web",20000,4),
+ (121,"Java Web Project",4000,5);
+ select * from Project;
+ show create table project;
+ INSERT INTO dept(dno,dname,location)
+ VALUES(1,"JAVA","MUMBAI")
+ (1,"JAVA","NEWDELHI")
+ (2,"PHP","MUMBAI")
+ (3,"JAVA SCRIPT","chennai")
