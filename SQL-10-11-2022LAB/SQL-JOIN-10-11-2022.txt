@@ -1,0 +1,294 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 21
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| companyabc         |
+| empdb              |
+| employee           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| swarupa            |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.01 sec)
+
+mysql> use empdb;
+Database changed
+mysql> create table Products(
+    -> Pid int not null,
+    -> PName varchar(20)not null,
+    -> Product_Price int not null,
+    -> primary key(Pid)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc Products;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| Pid           | int         | NO   | PRI | NULL    |       |
+| PName         | varchar(20) | NO   |     | NULL    |       |
+| Product_Price | int         | NO   |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+3 rows in set (0.05 sec)
+
+
+mysql> insert into Products
+    -> values(224,'NESCAFE',20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Products
+    -> values(124,'Maggie',15);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Products
+    -> values(125,'MilkeyBar',10);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Products
+    -> values(126,'KitKat',30);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Products
+    -> values(127,'Milo',50);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Products
+    -> values(128,'NesTea',25);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Products;
++-----+-----------+---------------+
+| Pid | PName     | Product_Price |
++-----+-----------+---------------+
+| 124 | Maggie    |            15 |
+| 125 | MilkeyBar |            10 |
+| 126 | KitKat    |            30 |
+| 127 | Milo      |            50 |
+| 128 | NesTea    |            25 |
+| 224 | NESCAFE   |            20 |
++-----+-----------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> alter table products add Product_Validation int not null;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from Products;
++-----+-----------+---------------+--------------------+
+| Pid | PName     | Product_Price | Product_Validation |
++-----+-----------+---------------+--------------------+
+| 124 | Maggie    |            15 |                  0 |
+| 125 | MilkeyBar |            10 |                  0 |
+| 126 | KitKat    |            30 |                  0 |
+| 127 | Milo      |            50 |                  0 |
+| 128 | NesTea    |            25 |                  0 |
+| 224 | NESCAFE   |            20 |                  0 |
++-----+-----------+---------------+--------------------+
+6 rows in set (0.00 sec)
+
+mysql> Desc Products;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| Pid                | int         | NO   | PRI | NULL    |       |
+| PName              | varchar(20) | NO   |     | NULL    |       |
+| Product_Price      | int         | NO   |     | NULL    |       |
+| Product_Validation | int         | NO   |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> update Products set PName='CoffeeMate'where Pid=221;
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from Products;
++-----+-----------+---------------+--------------------+
+| Pid | PName     | Product_Price | Product_Validation |
++-----+-----------+---------------+--------------------+
+| 124 | Maggie    |            15 |                  0 |
+| 125 | MilkeyBar |            10 |                  0 |
+| 126 | KitKat    |            30 |                  0 |
+| 127 | Milo      |            50 |                  0 |
+| 128 | NesTea    |            25 |                  0 |
+| 224 | NESCAFE   |            20 |                  0 |
++-----+-----------+---------------+--------------------+
+6 rows in set (0.00 sec)
+
+mysql> update Products set
+    -> Product_Validation= 2023;
+Query OK, 6 rows affected (0.00 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+mysql> selct * from Products;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selct * from Products' at line 1
+mysql> select * from Products;
++-----+-----------+---------------+--------------------+
+| Pid | PName     | Product_Price | Product_Validation |
++-----+-----------+---------------+--------------------+
+| 124 | Maggie    |            15 |               2023 |
+| 125 | MilkeyBar |            10 |               2023 |
+| 126 | KitKat    |            30 |               2023 |
+| 127 | Milo      |            50 |               2023 |
+| 128 | NesTea    |            25 |               2023 |
+| 224 | NESCAFE   |            20 |               2023 |
++-----+-----------+---------------+--------------------+
+6 rows in set (0.00 sec)
+
+mysql> Create table Company(
+    -> Cid int not null,
+    -> CName varchar(255)not null,
+    -> Country varchar(255),
+    -> Primary key(Cid)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc Company;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| Cid     | int          | NO   | PRI | NULL    |       |
+| CName   | varchar(255) | NO   |     | NULL    |       |
+| Country | varchar(255) | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Company
+    -> values(788,'NESTLE','USA');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Company
+    -> values(758,'NESTLE','INDIA');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Company
+    -> values(224,'NESTLE','JAPAN');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Company
+    -> values(789,'NESTLE','California');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Company
+    -> values(790,'NESTLE','LONDON');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Company;
++-----+--------+------------+
+| Cid | CName  | Country    |
++-----+--------+------------+
+| 224 | NESTLE | JAPAN      |
+| 758 | NESTLE | INDIA      |
+| 788 | NESTLE | USA        |
+| 789 | NESTLE | California |
+| 790 | NESTLE | LONDON     |
++-----+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> delete from Company where Cid=789;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Company;
++-----+--------+---------+
+| Cid | CName  | Country |
++-----+--------+---------+
+| 224 | NESTLE | JAPAN   |
+| 758 | NESTLE | INDIA   |
+| 788 | NESTLE | USA     |
+| 790 | NESTLE | LONDON  |
++-----+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select
+    -> Products.PName,Products.Pid,Company.CName,Company.Cid
+    -> From Products
+    -> INNER JOIN Company
+    -> ON Products.Pid=Company.Cid;
++---------+-----+--------+-----+
+| PName   | Pid | CName  | Cid |
++---------+-----+--------+-----+
+| NESCAFE | 224 | NESTLE | 224 |
++---------+-----+--------+-----+
+1 row in set (0.12 sec)
+
+mysql> select
+    -> Products.PName,Products.Pid,Company.CName,Company.Cid
+    -> From Products
+    -> LEFT JOIN Company
+    -> ON Products.Pid=Company.Cid;
++-----------+-----+--------+------+
+| PName     | Pid | CName  | Cid  |
++-----------+-----+--------+------+
+| Maggie    | 124 | NULL   | NULL |
+| MilkeyBar | 125 | NULL   | NULL |
+| KitKat    | 126 | NULL   | NULL |
+| Milo      | 127 | NULL   | NULL |
+| NesTea    | 128 | NULL   | NULL |
+| NESCAFE   | 224 | NESTLE |  224 |
++-----------+-----+--------+------+
+6 rows in set (0.00 sec)
+
+mysql> select Products.PName,Products.Pid,Company.CName,Company.Cid
+    -> From Products
+    -> RIGHT JOIN Company
+    -> ON Products.Pid= Company.Cid;
++---------+------+--------+-----+
+| PName   | Pid  | CName  | Cid |
++---------+------+--------+-----+
+| NESCAFE |  224 | NESTLE | 224 |
+| NULL    | NULL | NESTLE | 758 |
+| NULL    | NULL | NESTLE | 788 |
+| NULL    | NULL | NESTLE | 790 |
++---------+------+--------+-----+
+4 rows in set (0.00 sec)
+
+mysql> select * from Products full join Company;
++-----+-----------+---------------+--------------------+-----+--------+---------+
+| Pid | PName     | Product_Price | Product_Validation | Cid | CName  | Country |
++-----+-----------+---------------+--------------------+-----+--------+---------+
+| 124 | Maggie    |            15 |               2023 | 790 | NESTLE | LONDON  |
+| 124 | Maggie    |            15 |               2023 | 788 | NESTLE | USA     |
+| 124 | Maggie    |            15 |               2023 | 758 | NESTLE | INDIA   |
+| 124 | Maggie    |            15 |               2023 | 224 | NESTLE | JAPAN   |
+| 125 | MilkeyBar |            10 |               2023 | 790 | NESTLE | LONDON  |
+| 125 | MilkeyBar |            10 |               2023 | 788 | NESTLE | USA     |
+| 125 | MilkeyBar |            10 |               2023 | 758 | NESTLE | INDIA   |
+| 125 | MilkeyBar |            10 |               2023 | 224 | NESTLE | JAPAN   |
+| 126 | KitKat    |            30 |               2023 | 790 | NESTLE | LONDON  |
+| 126 | KitKat    |            30 |               2023 | 788 | NESTLE | USA     |
+| 126 | KitKat    |            30 |               2023 | 758 | NESTLE | INDIA   |
+| 126 | KitKat    |            30 |               2023 | 224 | NESTLE | JAPAN   |
+| 127 | Milo      |            50 |               2023 | 790 | NESTLE | LONDON  |
+| 127 | Milo      |            50 |               2023 | 788 | NESTLE | USA     |
+| 127 | Milo      |            50 |               2023 | 758 | NESTLE | INDIA   |
+| 127 | Milo      |            50 |               2023 | 224 | NESTLE | JAPAN   |
+| 128 | NesTea    |            25 |               2023 | 790 | NESTLE | LONDON  |
+| 128 | NesTea    |            25 |               2023 | 788 | NESTLE | USA     |
+| 128 | NesTea    |            25 |               2023 | 758 | NESTLE | INDIA   |
+| 128 | NesTea    |            25 |               2023 | 224 | NESTLE | JAPAN   |
+| 224 | NESCAFE   |            20 |               2023 | 790 | NESTLE | LONDON  |
+| 224 | NESCAFE   |            20 |               2023 | 788 | NESTLE | USA     |
+| 224 | NESCAFE   |            20 |               2023 | 758 | NESTLE | INDIA   |
+| 224 | NESCAFE   |            20 |               2023 | 224 | NESTLE | JAPAN   |
++-----+-----------+---------------+--------------------+-----+--------+---------+
+24 rows in set (0.02 sec)
+
+
+
+
